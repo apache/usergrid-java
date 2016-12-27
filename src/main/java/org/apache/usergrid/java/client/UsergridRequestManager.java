@@ -17,6 +17,7 @@
 package org.apache.usergrid.java.client;
 
 import okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient.Builder;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.usergrid.java.client.UsergridEnums.UsergridHttpMethod;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import static org.apache.usergrid.java.client.utils.ObjectUtils.isEmpty;
 
@@ -38,10 +40,32 @@ public class UsergridRequestManager {
 
     @NotNull private final UsergridClient usergridClient;
     @NotNull private final OkHttpClient httpClient;
-
+    @NotNull private final UsergridHttpConfig httpConfig;
+    
     public UsergridRequestManager(@NotNull final UsergridClient usergridClient) {
         this.usergridClient = usergridClient;
-        this.httpClient = new OkHttpClient();
+        this.httpConfig = new UsergridHttpConfig();
+        
+        Builder builder = new Builder();
+        this.httpClient = builder
+        	.retryOnConnectionFailure(this.httpConfig.getRetryOnConnectionFailure())
+        	.connectTimeout(this.httpConfig.getConnectTimeout(), TimeUnit.SECONDS)
+        	.readTimeout(this.httpConfig.getReadTimeout(), TimeUnit.SECONDS)
+        	.writeTimeout(this.httpConfig.getWriteTimeout(), TimeUnit.SECONDS)
+        	.build();
+    }
+    
+    public UsergridRequestManager(@NotNull final UsergridClient usergridClient, @NotNull final UsergridHttpConfig httpConfig) {
+        this.usergridClient = usergridClient;
+        this.httpConfig = httpConfig;
+        
+        Builder builder = new Builder();
+        this.httpClient = builder
+        	.retryOnConnectionFailure(this.httpConfig.getRetryOnConnectionFailure())
+        	.connectTimeout(this.httpConfig.getConnectTimeout(), TimeUnit.SECONDS)
+        	.readTimeout(this.httpConfig.getReadTimeout(), TimeUnit.SECONDS)
+        	.writeTimeout(this.httpConfig.getWriteTimeout(), TimeUnit.SECONDS)
+        	.build();
     }
 
     @NotNull

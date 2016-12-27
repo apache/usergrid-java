@@ -59,6 +59,16 @@ public final class Usergrid {
         }
         return Usergrid.sharedClient;
     }
+    
+    @NotNull
+    public static UsergridClient initSharedInstance(@NotNull final UsergridClientConfig config, @NotNull final UsergridHttpConfig httpConfig) {
+        if (Usergrid.isInitialized()) {
+            System.out.print("The Usergrid shared instance was already initialized. All subsequent initialization attempts (including this) will be ignored.");
+        } else {
+            Usergrid.sharedClient = new UsergridClient(config, httpConfig);
+        }
+        return Usergrid.sharedClient;
+    }
 
     @NotNull
     public static UsergridClient initSharedInstance(@NotNull final String orgId, @NotNull final String appId) {

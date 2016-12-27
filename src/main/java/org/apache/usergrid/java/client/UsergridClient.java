@@ -45,6 +45,11 @@ public class UsergridClient {
         this.config = config;
         this.requestManager = new UsergridRequestManager(this);
     }
+    
+    public UsergridClient(@NotNull final UsergridClientConfig config, @NotNull final UsergridHttpConfig httpConfig) {
+        this.config = config;
+        this.requestManager = new UsergridRequestManager(this, httpConfig);
+    }
 
     public UsergridClient(@NotNull final String orgId, @NotNull final String appId) {
         this(new UsergridClientConfig(orgId, appId));

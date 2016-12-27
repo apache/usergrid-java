@@ -26,7 +26,6 @@ public class UsergridUserAuth extends UsergridAuth {
 
     @NotNull private String username;
     @NotNull private String password;
-    private boolean isAdminUser = false;
 
     @NotNull public String getUsername() { return username; }
     public void setUsername(@NotNull final String username) { this.username = username; }
