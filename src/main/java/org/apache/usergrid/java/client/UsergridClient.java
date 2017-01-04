@@ -33,7 +33,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class UsergridClient {
 
-    @NotNull public static String DEFAULT_BASE_URL = "https://api.usergrid.com";
+    @NotNull public static String DEFAULT_BASE_URL = "https://apibaas-trial.apigee.net";
 
     @NotNull private UsergridClientConfig config;
     @Nullable private UsergridUser currentUser = null;
