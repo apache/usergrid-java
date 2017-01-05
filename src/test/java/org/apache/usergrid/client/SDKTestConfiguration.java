@@ -19,20 +19,14 @@ package org.apache.usergrid.client;
 import org.apache.usergrid.java.client.UsergridEnums.UsergridAuthMode;
 
 public class SDKTestConfiguration {
-    public static final String APP_CLIENT_ID = "b3U6THNcevskEeOQZLcUROUUVA"; //"YXA6_j0WsfFCEeWKoy6txsCOfA" ;
-    public static final String APP_CLIENT_SECRET = "b3U6RZHYznP28xieBzQPackFPmmnevU"; //"YXA6jg8x4wjq1AAyQBKtn4bRd1l0gJ8"; //
+    public static final String APP_CLIENT_ID = "YXA6-zvnTdLWEeaGGwrYgfQDvw";
+    public static final String APP_CLIENT_SECRET = "YXA64tQ5qQAW_IZYUAOn_tDRKz0HrAU";
 
-    public static final String APP_UserName = "javaSDK"; //"test";// //"b3U66ne33W4OEeWXmAIj6QFb-Q";
-    public static final String APP_Password = "Apigee123"; //"test";//"b3U6PxbpQiTrXKCWu0n1CjK1uTZXuG4";
-    public static final String USERGRID_URL = "https://api.usergrid.com/";
-    public static final String ORG_NAME = "rwalsh";
+    public static final String APP_UserName = "javaSDK";
+    public static final String APP_Password = "Apigee123";
+    public static final String USERGRID_URL = "https://apibaas-trial.apigee.net/";
+    public static final String ORG_NAME = "rjwalsh";
     public static final String APP_NAME = "sdk.demo";
 
     public static UsergridAuthMode authFallBack = UsergridAuthMode.APP;
-
-//  public static final String APP_CLIENT_ID = "YXA61n2kpFffEeWs9QLknKqhHw";
-//  public static final String APP_CLIENT_SECRET = "YXA69_aRW1IHLgMTUUYSitsGwOLY8uQ";
-//  public static final String USERGRID_URL = "https://fhirsandbox-prod.apigee.net/appservices";
-//  public static final String ORG_NAME = "usergrid";
-//  public static final String APP_NAME = "sandbox";
 }
