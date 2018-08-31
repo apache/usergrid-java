@@ -3,7 +3,7 @@ target/
 *.iml
 .classpath
 .project
-.vscode/settings.json
+.vscode/
 .settings/
 
 # APPLE
