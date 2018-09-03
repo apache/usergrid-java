@@ -57,6 +57,38 @@ UsergridResponse response = Usergrid.GET(query);
 List<UsergridEntity> entities = response.getEntities();
 ```
 
+- To get list of counter IDs:
+
+```java
+List<String> counteridslist = Usergrid.GETcounters();
+
+Example:
+    
+    "data": [
+        "application.collection.roles",
+        "application.collection.tblmformmanagements",
+        "application.collection.tblmforms",
+        "application.collection.tblmmodules",
+        "application.collection.tblmscreens",
+        "application.collection.users",
+        "application.collection.xmenus",
+        "application.entities",
+        "application.requests.delete",
+        "application.requests.get",
+        "application.requests.post",
+        "application.requests.put"
+    ]
+
+```
+
+- To get value of a specific counter by ID:
+
+```java
+long countervalue = Usergrid.GETcounterbyid("counterid");
+
+Example: 12345
+```
+
 ### POST and PUT
 
 POST and PUT requests both require a JSON body payload. You can pass either a Java object or a `UsergridEntity` instance. While the former works in principle, best practise is to use a `UsergridEntity` wherever practical. When an entity has a uuid or name property and already exists on the server, use a PUT request to update it. If it does not, use POST to create it.
