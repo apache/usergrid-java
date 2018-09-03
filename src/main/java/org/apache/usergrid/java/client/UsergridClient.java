@@ -26,9 +26,12 @@ import org.apache.usergrid.java.client.response.UsergridResponse;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 @SuppressWarnings("unused")
 public class UsergridClient {
@@ -213,6 +216,60 @@ public class UsergridClient {
     @NotNull
     public UsergridResponse sendRequest(@NotNull final UsergridRequest request) {
         return this.requestManager.performRequest(request);
+    }
+
+    @NotNull
+    public long GETcounterbyid(@NotNull final String counterid) {
+        String[] pathSegments = {"counters"};
+        UsergridRequest request = new UsergridRequest(UsergridHttpMethod.GET, UsergridRequest.APPLICATION_JSON_MEDIA_TYPE, this.clientAppUrl(), this.authForRequests(), pathSegments);
+        
+        Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("counter", counterid);
+        request.setParameters(parameters);
+        
+        UsergridResponse ugResponse = this.sendRequest(request);
+
+        long counter = -1;
+        if(ugResponse.ok()){
+            try{
+                JsonNode ugJsonResponse = ugResponse.getResponseJson();
+                JsonNode ugCounterArray = ugJsonResponse.get("counters");
+                JsonNode ugCounter = ugCounterArray.get(0);
+                JsonNode ugCounterValuesArray = ugCounter.get("values");
+                JsonNode ugCounterValueObj = ugCounterValuesArray.get(0);
+                JsonNode ugCounterValue = ugCounterValueObj.get("value");
+                return ugCounterValue.asLong(counter);
+            }
+            catch(Exception e){
+                return counter;
+            }
+        }
+        else{
+            return counter;
+        }
+    }
+
+    @NotNull
+    public List<String> GETcounters() {
+        String[] pathSegments = {"counters"};
+        UsergridRequest request = new UsergridRequest(UsergridHttpMethod.GET, UsergridRequest.APPLICATION_JSON_MEDIA_TYPE, this.clientAppUrl(), this.authForRequests(), pathSegments);                
+        UsergridResponse ugResponse = this.sendRequest(request);
+
+        List<String> counterids = new ArrayList<String>();
+        
+        if(ugResponse.ok()){
+            try{
+                JsonNode ugJsonResponse = ugResponse.getResponseJson();
+                counterids = ugJsonResponse.findValuesAsText("data");
+            }
+            catch(Exception e){
+                return counterids;
+            }
+            return counterids;
+        }
+        else{
+            return counterids;
+        }
     }
 
     @NotNull
