@@ -17,18 +17,6 @@
     <packaging>jar</packaging>
     <description>A Java client for Usergrid</description>
     <url>http://usergrid.apache.org</url>
-    <distributionManagement>
-        <repository>
-            <id>central</id>
-            <name>71e4bfd61496-releases</name>
-            <url>http://192.168.0.50:8081/artifactory/libs-release-local</url>
-        </repository>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>71e4bfd61496-snapshots</name>
-            <url>http://192.168.0.50:8081/artifactory/libs-snapshot-local</url>
-        </snapshotRepository>
-    </distributionManagement>
     
     <licenses>
         <license>

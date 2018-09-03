@@ -260,7 +260,11 @@ public class UsergridClient {
         if(ugResponse.ok()){
             try{
                 JsonNode ugJsonResponse = ugResponse.getResponseJson();
-                counterids = ugJsonResponse.findValuesAsText("data");
+                JsonNode ugCounterIdList = ugJsonResponse.get("data");
+                
+                for(JsonNode ugCounterId : ugCounterIdList){
+                    counterids.add(ugCounterId.asText());
+                }
             }
             catch(Exception e){
                 return counterids;
